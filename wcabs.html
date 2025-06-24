@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Car Booking</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: url('https://imgd.aeplcdn.com/664x374/n/cw/ec/51435/innova-crysta-exterior-left-rear-three-quarter.jpeg?q=80') no-repeat center center/cover;
+      color: white;
+    }
+
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .container h1 {
+      text-align: center;
+      font-size: 2em;
+    }
+
+    .container h1 .fa-car {
+      color: #ffce00;
+      margin-right: 10px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      font-size: 1em;
+      border: none;
+    }
+
+    input, select {
+      background: #fff;
+      color: #000;
+    }
+
+    button {
+      background-color: #ffce00;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e6b800;
+    }
+
+    .reviews {
+      margin-top: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .review {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 0;
+    }
+
+    .review:last-child {
+      border-bottom: none;
+    }
+
+    .review .name {
+      color: #00cfff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .review .stars {
+      color: #ffce00;
+      font-size: 1em;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1><i class="fa fa-car"></i> W Cabs </h1>
+      <p>Make your Ride Easy</p>
+      
+      <form id="bookingForm">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required maxlength="10"/>
+        
+       <select name="pickup" required>
+          <option value="Pick Up Location" disabled selected>**Pick Up Location**</option>
+          <option value="Kushtagi">Kushtagi</option>
+          <option value="Ilkal">Ilkal</option>
+          <option value="Hospet">Hospet</option>
+          <option value="Hampi">hampi</option>
+          <option value="Hubli">Hubli</option>
+          <option value="Gajendaragada">Gajendaragada</option>
+           <option value="Gadag">Gadag</option>
+           <option value="Bengaluru">Bengaluru</option>
+           
+
+        </select>
+        <input type="text" name="drop" placeholder="Drop Location" required />
+        <select name="car" required>
+          <option value="" disabled selected>**Select Car Type**</option>
+          <option value="Innova Crysta">Innova Crysta</option>
+          <option value="Ertiga">Ertiga</option>
+          <option value="Swift Dzire">Swift Dzire</option>
+          <option value="Hyundai Venue">Hyundai Venue</option>
+          <option value="Baleno">Baleno</option>
+          <option value="Tempo Traveller TT">Tempo Traveller TT</option>
+           <option value="Toofan Crusier">Toofan Crusier</option>
+           <option value="Mini Bus">Mini Bus</option>
+           
+
+        </select>
+        <button type="submit">Book Now</button>
+      </form>
+
+      <div class="reviews">
+        <h2>🚗 Customer Reviews</h2>
+        <div class="review">
+          <div class="name"><i class="fa fa-user-circle"></i> Renuka.</div>
+          <p>"Very clean and smooth service!"</p>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="Contact">
+          <div class="name"><i class="fa fa-user-circle"></i>Siddukumar .</div>
+          <p>"Contact Any Time 24/7"</p>
+          <div class="stars">8792765924</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch("https://script.google.com/macros/s/AKfycby2Lk22_OJbTBCl0EBm-raWwgy0Mq44braW4Ly62lrioAJYN84uvGbEs6fXzO4Qnx4v/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("✅ Booking submitted successfully!");
+          this.reset();
+        } else {
+          alert("❌ Error submitting booking.");
+        }
+      })
+      .catch(error => {
+        alert("❌ Network error.");
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>
